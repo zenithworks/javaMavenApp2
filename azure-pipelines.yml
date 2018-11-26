@@ -8,4 +8,7 @@ stages:
       vmImage: 'ubuntu-16.04'
       demand: maven
     steps:
-    - script: echo My dev job
+    - task: Maven@3
+      displayName: 'Maven pom.xml(lite)'
+      inputs:
+        mavenPomFile: 'pom-lite.xml'
