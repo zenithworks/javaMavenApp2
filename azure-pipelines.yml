@@ -26,3 +26,13 @@ stages:
       displayName: 'Publish Artifact: drop'
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
+- stage: TEST
+  jobs:
+  - job: Linux
+    pool:
+      vmImage: 'ubuntu-16.04'
+      demand: maven 
+    steps:
+    - script: |
+    echo "running tests..."
+    echo 'Tests complete.'
