@@ -1,29 +1,24 @@
-resources:
-- repo: self
-queue:
-  name: Hosted Ubuntu 1604
-  demands: maven
 stages:
-- stage: DEV
-  steps:
-  - task: Maven@3
-    displayName: 'Maven pom.xml(lite)'
-    inputs:
-      mavenPomFile: 'pom-lite.xml'
-  - task: Maven@3
-    displayName: 'Maven pom.xml(full)'
-    inputs:
-      mavenPomFile: 'pom-full.xml'
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-    inputs:
-      SourceFolder: '$(system.defaultworkingdirectory)'
-      Contents: '**/*.jar'
-      TargetFolder: '$(build.artifactstagingdirectory)'
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
-    inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)'
-- stage: TEST
-  steps:
-  - script: echo My TEST job
+- stage: dev
+  jobs:
+  - job: MyJob
+    displayName: Dev Job
+    continueOnError: true
+    steps:
+    - script: echo My dev job
+- stage: QA1
+  dependsOn: dev
+  jobs:
+  - job: QAJob
+    displayName: QA1
+    continueOnError: true
+    steps:
+    - script: echo My QA1 job
+- stage: QA2
+  dependsOn: dev
+  jobs:
+  - job: MyJob
+    displayName: QA2
+    continueOnError: true
+    steps:
+    - script: echo My QA2 job
