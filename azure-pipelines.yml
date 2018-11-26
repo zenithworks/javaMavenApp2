@@ -12,3 +12,17 @@ stages:
       displayName: 'Maven pom.xml(lite)'
       inputs:
         mavenPomFile: 'pom-lite.xml'
+    - task: Maven@3
+      displayName: 'Maven pom.xml(full)'
+      inputs:
+        mavenPomFile: 'pom-full.xml'
+    - task: CopyFiles@2
+      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(system.defaultworkingdirectory)'
+        Contents: '**/*.jar'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
