@@ -1,5 +1,5 @@
 stages:
-- stage: dev
+- stage: DEV
   jobs:
   - job: DevJob
     displayName: Dev
@@ -28,6 +28,7 @@ stages:
         PathtoPublish: '$(build.artifactstagingdirectory)'
 
 - stage: TEST
+  dependsOn: DEV
   jobs:
   - job: TestJob
     displayName: Test
@@ -40,6 +41,7 @@ stages:
         echo 'Tests complete.'
 
 - stage: STAGING
+  dependsOn: TEST
   jobs:
   - job: StagingJob
     displayName: Staging
