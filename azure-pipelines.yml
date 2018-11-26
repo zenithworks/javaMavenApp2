@@ -1,7 +1,5 @@
 name: githubreleasePipeline
-resources:
-  repository: self
-pool:
+queue:
   name: 'Hosted Ubuntu 1604'
   demands: maven
 stages:
