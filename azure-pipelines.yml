@@ -2,8 +2,6 @@ stages:
 - stage: DEV
   jobs:
   - job: Linux
-    displayName: Dev Job
-    continueOnError: true  
     pool:
       vmImage: 'ubuntu-16.04'
       demand: maven  
