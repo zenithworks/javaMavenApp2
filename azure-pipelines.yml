@@ -1,32 +1,8 @@
 stages:
-- stage: DEV
+- stage: dev
   jobs:
-  - job: Linux
-    pool:
-      vmImage: 'ubuntu-16.04'
-      demand: maven  
+  - job: MyJob
+    displayName: Dev Job
+    continueOnError: true
     steps:
-    - task: Maven@3
-      displayName: 'Maven pom.xml(lite)'
-      inputs:
-        mavenPomFile: 'pom-lite.xml'
-    - task: Maven@3
-      displayName: 'Maven pom.xml(full)'
-      inputs:
-        mavenPomFile: 'pom-full.xml'
-    - task: CopyFiles@2
-      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-      inputs:
-        SourceFolder: '$(system.defaultworkingdirectory)'
-        Contents: '**/*.jar'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
-- stage: TEST
-  - job: Linux
-    pool:
-      vmImage: 'ubuntu-16.04'      
-    steps:
-    - script: echo My TEST job
+    - script: echo My dev job
