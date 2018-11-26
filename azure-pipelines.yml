@@ -34,5 +34,5 @@ stages:
       demand: maven 
     steps:
     - script: |
-    echo "running tests..."
-    echo 'Tests complete.'
+        echo "running tests..."
+        echo 'Tests complete.'
