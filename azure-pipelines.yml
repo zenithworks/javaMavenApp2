@@ -1,8 +1,8 @@
 stages:
 - stage: dev
   jobs:
-  - job: MyJob
-    displayName: Dev Job
+  - job: DevJob
+    displayName: Dev
     continueOnError: true
     pool:
       vmImage: 'ubuntu-16.04'
@@ -29,7 +29,8 @@ stages:
 
 - stage: TEST
   jobs:
-  - job: Linux
+  - job: TestJob
+    displayName: Test
     pool:
       vmImage: 'ubuntu-16.04'
       demand: maven 
@@ -40,7 +41,8 @@ stages:
 
 - stage: STAGING
   jobs:
-  - job: Linux
+  - job: StagingJob
+    displayName: Staging
     pool:
       vmImage: 'ubuntu-16.04'
       demand: maven 
@@ -58,4 +60,5 @@ stages:
         githubConnection: zenithworks
         repositoryName: zenithworks/javaMavenApp2
         assets: '$(System.ArtifactsDirectory)\ZenithWorks-Core\drop\target\*.jar'
+
 
