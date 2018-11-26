@@ -30,8 +30,7 @@ stages:
 - stage: TEST
   dependsOn: DEV
   jobs:
-  - job: TestJob
-    displayName: Test
+  - job: TestJob    
     pool:
       vmImage: 'ubuntu-16.04'
       demand: maven 
@@ -43,11 +42,7 @@ stages:
 - stage: STAGING
   dependsOn: TEST
   jobs:
-  - job: StagingJob
-    displayName: Staging
-    pool:
-      vmImage: 'ubuntu-16.04'
-      demand: maven 
+  - job: StagingJob        
     steps:
     - task: PowerShell@1
       displayName: 'Deploy to Staging'
