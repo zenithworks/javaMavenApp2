@@ -9,11 +9,11 @@ stages:
       demand: maven
     steps:
     - task: Maven@3
-      displayName: 'Maven pom.xml(lite)'
+      displayName: 'Build Lite: Maven pom.xml(lite)'
       inputs:
         mavenPomFile: 'pom-lite.xml'
     - task: Maven@3
-      displayName: 'Maven pom.xml(full)'
+      displayName: 'Build Full: Maven pom.xml(full)'
       inputs:
         mavenPomFile: 'pom-full.xml'
     - task: CopyFiles@2
@@ -31,7 +31,7 @@ stages:
         echo 'Tests complete.'
     - task: GithubRelease@0 # github release task starts
       displayName: 'Create GitHub Release'
-      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v*')
+      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
       inputs:
         githubConnection: zenithworks
         repositoryName: zenithworks/javaAppWithMaven
