@@ -31,10 +31,11 @@ stages:
         echo 'Tests complete.'
     - task: GithubRelease@0 # github release task starts
       displayName: 'Create GitHub Release'
-      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/release-v')
       inputs:
         githubConnection: zenithworks
         repositoryName: zenithworks/javaMavenApp2
+        asset: $(build.artifactstagingdirectory)/*.jar
 
 
 
