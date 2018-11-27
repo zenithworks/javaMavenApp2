@@ -34,7 +34,8 @@ stages:
       condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
       inputs:
         githubConnection: zenithworks
-        repositoryName: zenithworks/javaAppWithMaven
+        repositoryName: zenithworks/javaMavenApp2
+
 
 
 
