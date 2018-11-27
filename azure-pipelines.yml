@@ -8,27 +8,27 @@ stages:
       vmImage: 'ubuntu-16.04'
       demand: maven
     steps:
-    - task: Maven@3
-      displayName: 'Build Lite: Maven pom.xml(lite)'
-      inputs:
-        mavenPomFile: 'pom-lite.xml'
-    - task: Maven@3
-      displayName: 'Build Full: Maven pom.xml(full)'
-      inputs:
-        mavenPomFile: 'pom-full.xml'
-    - task: CopyFiles@2
-      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-      inputs:
-        SourceFolder: '$(system.defaultworkingdirectory)'
-        Contents: '**/*.jar'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
-    - script: |
-        echo "running tests..."
-        echo 'Tests complete.'
+    #- task: Maven@3
+    #  displayName: 'Build Lite: Maven pom.xml(lite)'
+    #  inputs:
+    #    mavenPomFile: 'pom-lite.xml'
+    #- task: Maven@3
+    #  displayName: 'Build Full: Maven pom.xml(full)'
+    #  inputs:
+    #    mavenPomFile: 'pom-full.xml'
+    #- task: CopyFiles@2
+    #  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    #  inputs:
+    #    SourceFolder: '$(system.defaultworkingdirectory)'
+    #    Contents: '**/*.jar'
+    #    TargetFolder: '$(build.artifactstagingdirectory)'
+    #- task: PublishBuildArtifacts@1
+    #  displayName: 'Publish Artifact: drop'
+    #  inputs:
+    #    PathtoPublish: '$(build.artifactstagingdirectory)'
+    #- script: |
+    #    echo "running tests..."
+    #    echo 'Tests complete.'
     - task: GithubRelease@0 # github release task starts
       displayName: 'Create GitHub Release'
       condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
