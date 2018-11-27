@@ -19,8 +19,8 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
       inputs:
-        SourceFolder: '$(system.defaultworkingdirectory)'
-        Contents: 'target/*.jar'
+        SourceFolder: '$(system.defaultworkingdirectory)/target'
+        Contents: '*.jar'
         TargetFolder: '$(build.artifactstagingdirectory)'
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
